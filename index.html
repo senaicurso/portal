@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Interativo - Feira de Ciências</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #b3e5fc, #e1bee7);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+  }
+  header, footer {
+    background-color: #673ab7;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    left: 0;
+  }
+  header { top: 0; }
+  footer { bottom: 0; font-size: 14px; }
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 100px 0;
+  }
+  .qrcode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+    text-decoration: none;
+  }
+  .qrcode:hover { transform: scale(1.05); }
+  .qrcode img {
+    width: 150px;
+    height: 150px;
+  }
+  .qrcode span {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+  <header>🌟 Feira de Ciências 2025 - Portal Interativo 🌟</header>
+
+  <main>
+    <a href="asilo.html" class="qrcode">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://senaicurso.github.io/portal/asilo.html" alt="QR Asilo">
+      <span>🏡 Visita ao Asilo</span>
+    </a>
+    <a href="quimica.html" class="qrcode">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://senaicurso.github.io/portal/quimica.html" alt="QR Química">
+      <span>🧪 Laboratório de Química</span>
+    </a>
+    <a href="conhecimento.html" class="qrcode">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://senaicurso.github.io/portal/conhecimento.html" alt="QR Conhecimento">
+      <span>📚 Feira do Conhecimento</span>
+    </a>
+  </main>
+
+  <footer>Desenvolvido por Edson Zanatta e equipe 💻 | Projeto Interdisciplinar Português & Ciências</footer>
+</body>
+</html>
