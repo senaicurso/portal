@@ -25,10 +25,24 @@
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch; /* momentum scrolling em iOS */
     /* fundo aplicado diretamente (evita problemas de pseudo-elemento fixed no mobile) */
-    background: url('fundo.png') no-repeat center center;
+   /* background: url('fundo.png') no-repeat center center;*/
+    background:none;
     background-size: cover; /* ajusta automaticamente */
     background-attachment: scroll; /* mais confiável em mobile que 'fixed' */
   }
+
+  .bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200vh;  /* 🔥 cobre a rolagem no celular */
+    background: url('fundo.png') center center no-repeat;
+    background-size: cover;
+    z-index: -1; /* fica atrás de tudo */
+    filter: blur(4px) brightness(0.9);
+}
+
 
   /* header/footer com altura fixada para cálculo de espaçamento */
   header, footer {
@@ -122,6 +136,7 @@
 </style>
 </head>
 <body>
+  <div class="bg"></div>
   <header>🌟 Feira de Ciências 2025 - Portal Interativo 🌟</header>
 
   <main>
