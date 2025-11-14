@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Portal Interativo - Feira de Ciências</title>
 <style>
-  body {
+  /* reset/minha configuração básica */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
     margin: 0;
+    padding: 0;
+  }
+
+  body {
     font-family: 'Segoe UI', sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     text-align: center;
     position: relative;
-    overflow-x: hidden;     /* 🔹 permite scroll no celular */
-    background: none;
+    /* permite scroll vertical no mobile e evita scroll horizontal */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* momentum scrolling em iOS */
+    /* fundo aplicado diretamente (evita problemas de pseudo-elemento fixed no mobile) */
+    background: url('fundo.png') no-repeat center center;
+    background-size: cover; /* ajusta automaticamente */
+    background-attachment: scroll; /* mais confiável em mobile que 'fixed' */
   }
 
-  /* 🔹 Fundo com imagem ajustável */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('fundo.png') no-repeat center center fixed;
-    background-size: cover;
-    filter: blur(4px) brightness(0.9);
-    z-index: -1;
-  }
-
+  /* header/footer com altura fixada para cálculo de espaçamento */
   header, footer {
     background-color: rgba(103, 58, 183, 0.9);
     color: white;
     padding: 15px;
+    height: 56px;
+    line-height: 26px;
     position: fixed;
     width: 100%;
     left: 0;
@@ -44,57 +46,78 @@
   header { top: 0; }
   footer { bottom: 0; font-size: 14px; }
 
+  /* conteúdo principal precisa ter padding para não ficar atrás do header/footer */
   main {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 120px;   /* 🔹 dá espaço para o header */
-    margin-bottom: 160px;/* 🔹 dá espaço para o footer */
+    /* padding (safe) para o header/footer */
+    padding-top: 76px;    /* header height (56) + 20px */
+    padding-bottom: 86px; /* footer height (56) + 30px */
+    padding-left: 16px;
+    padding-right: 16px;
     z-index: 1;
-    padding: 20px;
   }
 
   .titulo {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #ffffff;
     text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
-    margin-bottom: 40px;
+    margin-bottom: 28px;
+    max-width: 100%;
   }
 
   .qrcode-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 40px;
+    gap: 28px;
+    width: 100%;
+    max-width: 1100px;
   }
 
   .qrcode {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(255, 255, 255, 0.85);
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 18px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.22);
+    transition: transform 0.18s ease;
     text-decoration: none;
     backdrop-filter: blur(4px);
+    flex: 0 0 180px; /* força largura mínima para ficar lado a lado em telas maiores */
   }
 
-  .qrcode:hover { transform: scale(1.05); }
+  .qrcode:hover { transform: scale(1.03); }
 
   .qrcode img {
     width: 150px;
     height: 150px;
+    display: block;
   }
 
   .qrcode span {
-    margin-top: 10px;
-    font-weight: bold;
+    margin-top: 8px;
+    font-weight: 700;
     color: #333;
+    font-size: 0.95rem;
+  }
+
+  /* responsividade: em telas pequenas as caixas ficam maiores e empilhadas */
+  @media (max-width: 520px) {
+    .titulo { font-size: 1.3rem; margin-bottom: 18px; }
+    .qrcode { flex: 0 0 46%; /* duas por linha */ width: auto; }
+    .qrcode img { width: 140px; height: 140px; }
+  }
+
+  @media (max-width: 380px) {
+    .qrcode { flex: 0 0 90%; } /* uma por linha em telas muito estreitas */
+    .qrcode img { width: 160px; height: 160px; } /* fica maior e mais tocável */
   }
 </style>
 </head>
@@ -103,7 +126,8 @@
 
   <main>
     <h1 class="titulo">🤖✨ Feira do Conhecimento – Explorando Ciência, Tecnologia e Criatividade 🌱🔬</h1>
-
+    <br>
+    <br>
     <div class="qrcode-container">
       <a href="asilo.html" class="qrcode">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://senaicurso.github.io/portal/asilo.html" alt="QR Asilo">
